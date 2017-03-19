@@ -12,6 +12,9 @@
 #pragma once
 
 #include "TKBaseObject.h"
+#include "TKEngine2.h"
+
+#if 0
 
 // 전방선언
 class TKD3D;
@@ -82,7 +85,7 @@ private:
     string              EngineRootDir;
 
 	XMMATRIX			matIdentity;            // 단위매트릭스
-    int                 TotalVertexCount;       // 렌더링되는 토탈 버텍스 카운트
+    int                 m_TotalVertexCount;       // 렌더링되는 토탈 버텍스 카운트
     HWND                hWnd;                   // 현재 윈도 핸들
     HINSTANCE           hInstance;              // 현재 윈도 인스턴스
 
@@ -124,7 +127,7 @@ private:
     TKEngineObjectList  *pCollisionObjectList;      // 충돌 객체 관리자
     TKRenderQueue       *pRenderQueue;              // 렌더링 큐
     TKSceneGraphManager *pSceneGraphManager;        // 씬 그래프 관리자
-    TKRenderFuncList    *pRenderFuncList;           // RenderFunc List
+    TKRenderFuncList    *m_pRenderFuncList;           // RenderFunc List
     
     // TKRenderFunc 객체    
     TKGeneralRender     *pGeneralRender;            // 일반 렌더 객체
@@ -355,3 +358,5 @@ public:
 /////////////////////////////////////////////////////////////////////////
 
 #include "./TKEngine.hpp"
+
+#endif

@@ -1,5 +1,7 @@
 #pragma once
 
+#if 0
+
 #include "./TKD3D.h"
 
 template <class SHADEREFFECT> 
@@ -17,3 +19,5 @@ SHADEREFFECT * TKEngine::ShaderLoad( string FXFileName, string TechniqueName)
     }
     return pShaderEffect;
 }
+
+#endif

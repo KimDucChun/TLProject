@@ -68,7 +68,9 @@
 	#include <dxgi.h>
 	#include <d3dcommon.h>
 	#include <d3d11.h>
-	#include <xnamath.h>
+	#include <DirectXMath.h>
+	
+	//#include <xnamath.h>
 #endif
 
 #include <d3d9types.h>
@@ -95,9 +97,7 @@
 
 //using namespace KContainer;
 using namespace std;
-//using namespace stdext;
-
-extern HWND g_hWnd;
+using namespace DirectX;
 
 #ifdef SHADER_DEBUGMODE
     #define ENGINE_DEVICETYPE       D3DDEVTYPE_REF

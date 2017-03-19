@@ -43,7 +43,6 @@ protected:
     int nOffsetY;
 
 public:
-    TKInput(TKEngine *pEngine);
     virtual ~TKInput(void);
 
     void Init(void);

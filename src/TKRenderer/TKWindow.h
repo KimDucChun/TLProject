@@ -2,13 +2,11 @@
 
 #include "TKCommon.h"
 
-class TKEngine;
+class TKEngine2;
 
 class TKWindow
 {
 protected:
-    TKEngine    *pEngine;
-
     WNDCLASS    wc;
     MSG         msg;
     HWND        hWnd;
@@ -23,8 +21,6 @@ protected:
 public:
     void SetWndClass();
     void SetWndInstance();
-    void SetEngine(TKEngine *pEngine);
-    TKEngine * GetEngine(void);
     
     MSG* GetMSG(void);
     HWND GetHWND(void);

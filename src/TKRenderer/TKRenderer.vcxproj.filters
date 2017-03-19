@@ -40,6 +40,9 @@
     <ClCompile Include="TKObject\TKTime.cpp">
       <Filter>TKObject</Filter>
     </ClCompile>
+    <ClCompile Include="TKObject\TKEngine2.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TKCommon.h" />
@@ -71,6 +74,12 @@
       <Filter>TKObject</Filter>
     </ClInclude>
     <ClInclude Include="TKObject\TKTime.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKEngine2.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKEngine2.hpp">
       <Filter>TKObject</Filter>
     </ClInclude>
   </ItemGroup>

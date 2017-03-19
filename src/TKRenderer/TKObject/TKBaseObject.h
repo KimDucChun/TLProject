@@ -11,10 +11,9 @@ private:
     bool        m_Deleted;
     bool        m_Released;
     
-    TKEngine *  m_pEngine;    
 public:
-    TKBaseObject(TKEngine *pEngine);
-    TKBaseObject(TKEngine *pEngine, int ID);
+    TKBaseObject(void);
+    TKBaseObject(int ID);
     virtual ~TKBaseObject(void);
     
     virtual void Init(void);
@@ -32,8 +31,5 @@ public:
     bool GetDeleted(void);
     void SetDeleted(bool Deleted);
     
-    TKEngine *GetEngine(void);
-    void SetEngine(TKEngine *pEngine);
-
     virtual const TKBaseObject & operator = (const TKBaseObject & BaseObject);
 };

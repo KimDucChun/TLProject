@@ -18,7 +18,7 @@ TKIMEInput::~TKIMEInput(void)
 
 int TKIMEInput::OnComposition(WPARAM wParam, LPARAM lParam)
 {
-	m_hImc = ImmGetContext(pEngine->GethWnd());
+	m_hImc = ImmGetContext(GetEngine()->GethWnd());
 
 	if(lParam & GCS_COMPSTR)
 	{
@@ -43,7 +43,7 @@ int TKIMEInput::OnComposition(WPARAM wParam, LPARAM lParam)
 
 	}
 
-	ImmReleaseContext(pEngine->GethWnd(), m_hImc);
+	ImmReleaseContext(GetEngine()->GethWnd(), m_hImc);
 	return 0;
 }
 

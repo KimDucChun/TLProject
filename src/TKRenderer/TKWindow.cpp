@@ -2,8 +2,7 @@
 #include "TKObject/TKIMEInput.h"
 #include "TKObject/TKEngine.h"
 
-static TKIMEInput *g_pIMEInput = NULL;
-static TKEngine *g_pEngine = NULL;
+//static TKIMEInput *g_pIMEInput = NULL;
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -15,27 +14,27 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             break;
 
         case WM_IME_STARTCOMPOSITION:
-            g_pIMEInput->OnStartComposition(wParam, lParam);
+            //g_pIMEInput->OnStartComposition(wParam, lParam);
             return 0;
             break;
 
         case WM_IME_COMPOSITION:
-            g_pIMEInput->OnComposition(wParam, lParam);
+            //g_pIMEInput->OnComposition(wParam, lParam);
             return 0;
             break;
 
         case WM_IME_ENDCOMPOSITION:
-            g_pIMEInput->OnEndComposition(wParam, lParam);
+            //g_pIMEInput->OnEndComposition(wParam, lParam);
             return 0;
             break;
 
         case WM_IME_NOTIFY:
-            g_pIMEInput->OnNotify(wParam, lParam);
+            //g_pIMEInput->OnNotify(wParam, lParam);
             return 0;
             break;
 
         case WM_CHAR:
-            g_pIMEInput->OnChar(wParam, lParam);
+            //g_pIMEInput->OnChar(wParam, lParam);
             break;
 
         case WM_IME_SETCONTEXT:
@@ -97,18 +96,6 @@ void TKWindow::SetWndInstance()
     UpdateWindow( hWnd );
 }
 
-void TKWindow::SetEngine(TKEngine *pEngine)
-{
-    this->pEngine = pEngine;
-    g_pEngine = this->pEngine;
-    g_pIMEInput = this->pEngine->GetIMEInput();    
-}
-
-TKEngine * TKWindow::GetEngine(void)
-{
-    return pEngine;
-}
-
 MSG* TKWindow::GetMSG(void)
 {
     return &msg;
@@ -126,14 +113,9 @@ void TKWindow::SetMainMenu(LPTSTR nResMenu)
 
 void TKWindow::Loop(void)
 {
-	// TODO : 이 부분 TKWindows 로 이관하고
-	// DoProcess 부분만 여기서 처리할 수 있도록 함
 	MSG msg;
-
 	while (true)
 	{
-		//GetMessage    <- 메시지큐에 메시지가 들어올때까지 대기.
-		//PeekMessage   <- 메시지큐에 메시지가 없을때도 계속 루프를 순회한다.
 		if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
 		{
 			if (msg.message == WM_QUIT)
@@ -142,13 +124,10 @@ void TKWindow::Loop(void)
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-
-		if (pEngine)
+		else
 		{
-			pEngine->DoProcess();
+			if (GetEngine())
+				GetEngine()->Frame();
 		}
 	}
 }
-
-
-void Loop(void);

@@ -1,8 +1,7 @@
 #include "TKBaseObject.h"
 
-TKBaseObject::TKBaseObject(TKEngine *pEngine)
-    :m_pEngine(pEngine)
-    ,m_ID(-1)
+TKBaseObject::TKBaseObject(void)
+    :m_ID(-1)
     ,m_Deleted(false)
     ,m_NodeName("")
     ,m_Released(false)
@@ -10,9 +9,8 @@ TKBaseObject::TKBaseObject(TKEngine *pEngine)
     SetObjectType( eotBaseObject );
 }
 
-TKBaseObject::TKBaseObject(TKEngine *pEngine, int ID)
-    :m_pEngine(pEngine)
-    ,m_ID(ID)
+TKBaseObject::TKBaseObject(int ID)
+    :m_ID(ID)
     ,m_Deleted(false)
     ,m_NodeName("")
     ,m_Released(false)
@@ -73,22 +71,11 @@ void TKBaseObject::SetDeleted(bool Deleted)
     m_Deleted = Deleted;
 }
 
-TKEngine * TKBaseObject::GetEngine(void)
-{
-    return m_pEngine;
-}
-
-void TKBaseObject::SetEngine(TKEngine *pEngine)
-{
-    m_pEngine = pEngine;
-}
-
 const TKBaseObject & TKBaseObject::operator = (const TKBaseObject & BaseObject)
 {
     m_ID        = BaseObject.m_ID;
     m_NodeName  = BaseObject.m_NodeName;
     m_Deleted   = BaseObject.m_Deleted;
-    m_pEngine   = BaseObject.m_pEngine;
 
     return BaseObject;
 }

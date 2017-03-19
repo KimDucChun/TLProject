@@ -21,9 +21,6 @@ private:
     int				m_iFPSCnt;
     
 public:
-    TKTime(TKEngine *pEngine);
-    virtual ~TKTime(void);
-    
     void Init(void);
     void Frame(void);
     

@@ -1,3 +1,5 @@
+#if 0
+
 //#include "TKCollisionChecker.h"
 //#include "TKFileConvertClasses.h"
 #include "TKTexture.h"
@@ -52,7 +54,7 @@
 #define MULTI_THREAD
 
 TKEngine::TKEngine(HINSTANCE hInstance, HWND hWnd)
-:TKBaseObject(NULL, -1)
+:TKBaseObject(-1)
 //,EngineRootDir("")
 //,DeviceLost(false)
 //,pExternFrame(NULL)
@@ -704,7 +706,7 @@ TKTextureManager * TKEngine::GetTextures(void)
 
 int TKEngine::GetTotalVertexCount(void)
 {
-	return TotalVertexCount;
+	return m_TotalVertexCount;
 }
 
 XMMATRIX * TKEngine::GetMatrixIdentity(void)
@@ -769,7 +771,7 @@ TKSceneGraphManager * TKEngine::GetSceneGraphManager(void)
 
 TKRenderFuncList * TKEngine::GetRenderFuncList(void)
 {
-	return pRenderFuncList;
+	return m_pRenderFuncList;
 }
 
 TKGeneralRender * TKEngine::GetGeneralRender(void)
@@ -1054,7 +1056,7 @@ void TKEngine::CheckDeviceLost(void)
 	else if (hr == D3DERR_DEVICENOTRESET)
 	{
 		// 리소스 해제
-		pRenderFuncList->Release();
+		m_pRenderFuncList->Release();
 		pEngineResourceList->Release();
 
 		// D3D리셋
@@ -1062,7 +1064,7 @@ void TKEngine::CheckDeviceLost(void)
 		if (FAILED(hr)) return; // 실패했으면 다음루프에 다시 처리
 
 								// 리소스 재생성
-		pRenderFuncList->Init();
+		m_pRenderFuncList->Init();
 		pEngineResourceList->Init();
 
 		// D3D 상태 초기화
@@ -1072,3 +1074,4 @@ void TKEngine::CheckDeviceLost(void)
 	}
 #endif
 }
+#endif

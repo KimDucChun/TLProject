@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="TKObject">
+      <UniqueIdentifier>{142c6ebe-7463-4890-815e-8da7d3328bfd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TKCommon.cpp" />
+    <ClCompile Include="TKObject.cpp" />
+    <ClCompile Include="TKWindow.cpp" />
+    <ClCompile Include="TKObject\TKBaseObject.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKEngine.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKIMEInput.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKThread.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKD3D.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKTexture.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKInput.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKTime.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TKCommon.h" />
+    <ClInclude Include="TKInterface.h" />
+    <ClInclude Include="TKObject.h" />
+    <ClInclude Include="TKWindow.h" />
+    <ClInclude Include="TKObject\TKBaseObject.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKEngine.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKEngine.hpp">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKIMEInput.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKThread.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKD3D.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKTexture.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKInput.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKTime.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

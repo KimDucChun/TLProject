@@ -1,13 +1,17 @@
 #include "TKD3D.h"
 #include "TKEngine.h"
 #include "DirectXColors.h"
+#include "d3d11_1.h"
 //#include "TKCamera.h"
 
 TKD3D::TKD3D(void)
 	:TKBaseObject(-1)
 	,m_pD3D(nullptr)
+	, m_pD3D1(nullptr)
 	,m_pD3DImmediateContext(nullptr)
+	,m_pD3DImmediateContext1(nullptr)
 	,m_pSwapChain(nullptr)
+	,m_pSwapChain1(nullptr)
 	,m_pDepthStencilBuffer(nullptr)
 	,m_pRenderTargetView(nullptr)
 	,m_pDepthStencilView(nullptr)
@@ -18,8 +22,11 @@ TKD3D::TKD3D(void)
 TKD3D::~TKD3D(void)
 {
 	SAFERELEASE(m_pD3D);
+	SAFERELEASE(m_pD3D1);
 	SAFERELEASE(m_pD3DImmediateContext);
+	SAFERELEASE(m_pD3DImmediateContext1);
 	SAFERELEASE(m_pSwapChain);
+	SAFERELEASE(m_pSwapChain1);
 	SAFERELEASE(m_pDepthStencilBuffer);
 	SAFERELEASE(m_pRenderTargetView);
 	SAFERELEASE(m_pDepthStencilView);
@@ -81,6 +88,62 @@ void TKD3D::Init(void)
 
 	assert(m_m4xMsaaQuality > 0);
 
+	// Create swap chain
+	IDXGIFactory2* dxgiFactory2 = nullptr;
+	hr = dxgiFactory->QueryInterface(__uuidof(IDXGIFactory2), reinterpret_cast<void**>(&dxgiFactory2));
+	if (dxgiFactory2)
+	{
+		// DirectX 11.1 or later
+		hr = m_pD3D->QueryInterface(__uuidof(ID3D11Device1), reinterpret_cast<void**>(&m_pD3D1));
+		if (SUCCEEDED(hr))
+		{
+			(void)m_pD3DImmediateContext->QueryInterface(__uuidof(ID3D11DeviceContext1), reinterpret_cast<void**>(&m_pD3DImmediateContext1));
+		}
+
+		DXGI_SWAP_CHAIN_DESC1 sd;
+		ZeroMemory(&sd, sizeof(sd));
+		sd.Width = SCREEN_WIDTH;
+		sd.Height = SCREEN_HEIGHT;
+		sd.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		//sd.SampleDesc.Count = 1;
+		//sd.SampleDesc.Quality = 0;
+		sd.SampleDesc.Count = 4;
+		sd.SampleDesc.Quality = m_m4xMsaaQuality - 1;
+
+		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		sd.BufferCount = 1;
+
+		hr = dxgiFactory2->CreateSwapChainForHwnd(m_pD3D, GetEngine()->GethWnd(), &sd, nullptr, nullptr, &m_pSwapChain1);
+		if (SUCCEEDED(hr))
+		{
+			hr = m_pSwapChain1->QueryInterface(__uuidof(IDXGISwapChain), reinterpret_cast<void**>(&m_pSwapChain));
+		}
+
+		dxgiFactory2->Release();
+	}
+	else
+	{
+		// DirectX 11.0 systems
+		DXGI_SWAP_CHAIN_DESC sd;
+		ZeroMemory(&sd, sizeof(sd));
+		sd.BufferCount = 1;
+		sd.BufferDesc.Width = SCREEN_WIDTH;
+		sd.BufferDesc.Height = SCREEN_HEIGHT;
+		sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		sd.BufferDesc.RefreshRate.Numerator = 60;
+		sd.BufferDesc.RefreshRate.Denominator = 1;
+		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		sd.OutputWindow = GetEngine()->GethWnd();
+		//sd.SampleDesc.Count = 1;
+		//sd.SampleDesc.Quality = 0;
+		sd.SampleDesc.Count = 4;
+		sd.SampleDesc.Quality = m_m4xMsaaQuality - 1;
+
+		sd.Windowed = TRUE;
+
+		hr = dxgiFactory->CreateSwapChain(m_pD3D, &sd, &m_pSwapChain);
+	}
+#if 0
 	DXGI_SWAP_CHAIN_DESC	sd;
 	ZeroMemory(&sd, sizeof(sd));
 	sd.BufferDesc.Width = SCREEN_WIDTH;
@@ -112,8 +175,9 @@ void TKD3D::Init(void)
 
 	//SAFERELEASE(dxgiDevice);
 	//SAFERELEASE(dxgiAdapter);
-	SAFERELEASE(dxgiFactory);
+#endif
 
+	SAFERELEASE(dxgiFactory);
 
 	InitRenderTargetView();
 	InitDepthStencilBufferView();
@@ -123,8 +187,11 @@ void TKD3D::Init(void)
 void TKD3D::Release(void)
 {
 	SAFERELEASE(m_pD3D);
+	SAFERELEASE(m_pD3D1);
 	SAFERELEASE(m_pD3DImmediateContext);
+	SAFERELEASE(m_pD3DImmediateContext1);
 	SAFERELEASE(m_pSwapChain);
+	SAFERELEASE(m_pSwapChain1);
 	SAFERELEASE(m_pDepthStencilBuffer);
 	SAFERELEASE(m_pRenderTargetView);
 	SAFERELEASE(m_pDepthStencilView);
@@ -142,7 +209,7 @@ void TKD3D::InitRenderTargetView(void)
 	if (FAILED(hr))
 		return;
 
-	hr = m_pD3D->CreateRenderTargetView(pBackBuffer, 0, &m_pRenderTargetView);
+	hr = m_pD3D->CreateRenderTargetView(pBackBuffer, nullptr, &m_pRenderTargetView);
 	if (FAILED(hr))
 		return;
 
@@ -151,6 +218,7 @@ void TKD3D::InitRenderTargetView(void)
 
 void TKD3D::InitDepthStencilBufferView(void)
 {
+#if 1
 	SAFERELEASE(m_pDepthStencilBuffer);
 	SAFERELEASE(m_pDepthStencilView);
 
@@ -179,6 +247,9 @@ void TKD3D::InitDepthStencilBufferView(void)
 		return;
 
 	m_pD3DImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+#else
+	m_pD3DImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
+#endif
 }
 
 void TKD3D::InitViewPort(void)

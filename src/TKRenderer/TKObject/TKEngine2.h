@@ -15,8 +15,8 @@ private:
     string              EngineRootDir;
 
 	XMMATRIX			matIdentity;            // 단위매트릭스
-    HWND                hWnd;                   // 현재 윈도 핸들
-    HINSTANCE           hInstance;              // 현재 윈도 인스턴스
+    HWND                m_hWnd;                 // 현재 윈도 핸들
+    HINSTANCE           m_hInstance;              // 현재 윈도 인스턴스
 
     // 이하 기본 객체
     TKD3D               *m_pD3D;                  // D3D 디바이스 객체

@@ -9,26 +9,27 @@ class TKWindow
 protected:
     WNDCLASS    wc;
     MSG         msg;
-    HWND        hWnd;
+    HWND        m_hWnd;
 
-    HINSTANCE   hInstance;
-    HINSTANCE   hPrevInstance;
-    LPSTR       lpCmdLine;
-    INT         nCmdShow;
+    HINSTANCE   m_hInstance;
+    HINSTANCE   m_hPrevInstance;
+    LPSTR       m_lpCmdLine;
+    INT         m_nCmdShow;
 
     LPTSTR      nResMenu;
 
 public:
-    void SetWndClass();
-    void SetWndInstance();
+    void InitWndClass();
+    void InitWndInstance();
     
-    MSG* GetMSG(void);
-    HWND GetHWND(void);
-
-    void SetMainMenu(LPTSTR nResMenu);
-
 	void Loop(void);
 
     TKWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow);
     virtual ~TKWindow(void);
+
+	MSG*		GetMSG(void);
+	HWND		GetHWND(void);
+	HINSTANCE	GetHInstance(void);
+
+	void SetMainMenu(LPTSTR nResMenu);
 };

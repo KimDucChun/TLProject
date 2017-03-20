@@ -7,6 +7,8 @@ TKEngine2 * GetEngine()
 }
 
 TKEngine2::TKEngine2(HINSTANCE hInstance, HWND hWnd)
+	:m_hInstance(hInstance)
+	,m_hWnd(hWnd)
 {
 	g_pEngine = this;
 
@@ -42,12 +44,12 @@ ID3D11DeviceContext * TKEngine2::GetD3DContext(void)
 
 HWND TKEngine2::GethWnd(void)
 {
-	return hWnd;
+	return m_hWnd;
 }
 
 HINSTANCE TKEngine2::GethInstance(void)
 {
-	return hInstance;
+	return m_hInstance;
 }
 
 void TKEngine2::Frame(void)

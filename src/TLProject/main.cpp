@@ -13,11 +13,11 @@ int CALLBACK WinMain(
 
 	// 윈도우 인스턴스 생성
 	pWindow = new TKWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
-	pWindow->SetWndClass();
-	pWindow->SetWndInstance();
+	pWindow->InitWndClass();
+	pWindow->InitWndInstance();
 	
 	// 렌더러 인스턴스 생성
-	pEngine = new TKEngine2(hInstance, pWindow->GetHWND());
+	pEngine = new TKEngine2(pWindow->GetHInstance(), pWindow->GetHWND());
 	//pEngine->SetEngineRootDir(string("D:\\KEngineProject\\KEngine\\"));
 	//pEngine->SetUserTextureDir(string("D:\\KEngineProject\\Textures\\"));
 	//pEngine->SetModelDir(string("D:\\KEngineProject\\Models\\"));

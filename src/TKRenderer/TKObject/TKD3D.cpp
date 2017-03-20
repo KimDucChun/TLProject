@@ -88,6 +88,7 @@ void TKD3D::Init(void)
 
 	assert(m_m4xMsaaQuality > 0);
 
+#if 0
 	// Create swap chain
 	IDXGIFactory2* dxgiFactory2 = nullptr;
 	hr = dxgiFactory->QueryInterface(__uuidof(IDXGIFactory2), reinterpret_cast<void**>(&dxgiFactory2));
@@ -143,7 +144,7 @@ void TKD3D::Init(void)
 
 		hr = dxgiFactory->CreateSwapChain(m_pD3D, &sd, &m_pSwapChain);
 	}
-#if 0
+#else
 	DXGI_SWAP_CHAIN_DESC	sd;
 	ZeroMemory(&sd, sizeof(sd));
 	sd.BufferDesc.Width = SCREEN_WIDTH;
@@ -173,8 +174,6 @@ void TKD3D::Init(void)
 	if (FAILED(hr))
 		return;
 
-	//SAFERELEASE(dxgiDevice);
-	//SAFERELEASE(dxgiAdapter);
 #endif
 
 	SAFERELEASE(dxgiFactory);
@@ -218,7 +217,6 @@ void TKD3D::InitRenderTargetView(void)
 
 void TKD3D::InitDepthStencilBufferView(void)
 {
-#if 1
 	SAFERELEASE(m_pDepthStencilBuffer);
 	SAFERELEASE(m_pDepthStencilView);
 
@@ -247,9 +245,6 @@ void TKD3D::InitDepthStencilBufferView(void)
 		return;
 
 	m_pD3DImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
-#else
-	m_pD3DImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
-#endif
 }
 
 void TKD3D::InitViewPort(void)

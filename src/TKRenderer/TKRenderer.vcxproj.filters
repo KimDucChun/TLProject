@@ -43,6 +43,15 @@
     <ClCompile Include="TKObject\TKEngine2.cpp">
       <Filter>TKObject</Filter>
     </ClCompile>
+    <ClCompile Include="TKObject\TKCamera.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKEngineObject.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKEngineResource.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TKCommon.h" />
@@ -80,6 +89,18 @@
       <Filter>TKObject</Filter>
     </ClInclude>
     <ClInclude Include="TKObject\TKEngine2.hpp">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKCamera.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKCamera.hpp">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKEngineObject.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKEngineResource.h">
       <Filter>TKObject</Filter>
     </ClInclude>
   </ItemGroup>

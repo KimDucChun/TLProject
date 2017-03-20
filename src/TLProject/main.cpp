@@ -1,6 +1,17 @@
 #include "../TKRenderer/TKWindow.h"
 #include "../TKRenderer/TKObject/TKEngine2.h"
 
+/*
+1. 미로생성
+2. ㅂㄷㅂㅈㄷㅂㅈㄷㅂㅈㄷㅂㅈㄷㅂㅈㄷㅂㅈㄷㅂㅈㄷ
+3. ㅂㅈㄷㅂㅈㄷㅂㅈㄷㅂㅈㄷ
+4. ㅂㅈㄷㅂㅈㄱㅂㅈㄱㅂㅈㄱ
+
+1. 월드메쉬
+2. 이동메쉬
+3.
+*/
+
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
 	_In_ HINSTANCE hPrevInstance,

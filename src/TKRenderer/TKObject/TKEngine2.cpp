@@ -64,23 +64,20 @@ void TKEngine2::Frame(void)
 
 XMMATRIX * TKEngine2::GetViewMatrix(void)
 {
-	//return &(m_pD3D->GetCamera()->GetFS()->GetViewMatrix());
-	return NULL;
+	return &(m_pD3D->GetCamera()->GetFS()->GetViewMatrix());
 }
 
 XMMATRIX * TKEngine2::GetProjectionMatrix(void)
 {
-	//return m_pD3D->GetMatProjection();
-	return NULL;
+	return m_pD3D->GetMatProjection();
 }
 
 void TKEngine2::SetCamera(TKCamera *pCamera)
 {
-	//m_pD3D->SetCamera(pCamera);
+	m_pD3D->SetCamera(pCamera);
 }
 
 TKCamera * TKEngine2::GetCamera(void)
 {
-	//return m_pD3D->GetCamera();
-	return NULL;
+	return m_pD3D->GetCamera();
 }

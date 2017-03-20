@@ -1,0 +1,13 @@
+#pragma once
+
+#include "TKBaseObject.h"
+
+/////////////////////////////////////////////////////////////////////
+// TKEngineResource
+/////////////////////////////////////////////////////////////////////
+class TKEngineResource : public TKBaseObject
+{
+public:
+    TKEngineResource(TKEngine *pEngine, int ID);
+    virtual ~TKEngineResource(void);
+};

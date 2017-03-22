@@ -8,6 +8,6 @@
 class TKEngineResource : public TKBaseObject
 {
 public:
-    TKEngineResource(TKEngine *pEngine, int ID);
+    TKEngineResource(int ID);
     virtual ~TKEngineResource(void);
 };

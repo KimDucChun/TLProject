@@ -8,52 +8,13 @@ class TKSGObject;
 ////////////////////////////////////////////////////////////////////////////////
 struct ST_CAMERADATA
 {
-    D3DXVECTOR3 UpVec;
-    D3DXVECTOR3 LookVec;
-    D3DXVECTOR3 RightVec;
-    D3DXVECTOR3 EyePt;
-    D3DXVECTOR3 LightLookAtPt;
-    D3DXMATRIX  matView;
-    TKSGObject *pSGObject;
-};
-
-////////////////////////////////////////////////////////////////////////////////
-// TKCameraRSObject
-////////////////////////////////////////////////////////////////////////////////
-class TKCameraRSObject : public TKRenderSideObject
-{
-    friend class TKCameraFSObject;
-private:
-    virtual void BeforeRender(const ERenderFuncType RenderType) {;}
-    virtual void Render(const ERenderFuncType RenderType)       {;}
-    virtual void AfterRender(const ERenderFuncType RenderType)  {;}
-protected:
-    ST_CAMERADATA   *pData;
-
-public:
-    TKCameraRSObject(TKEngine *pEngine, TKEngineObject *pParent);
-    virtual ~TKCameraRSObject(void);
-    
-    D3DXVECTOR3 & GetUpVec(void)                        { return pData->UpVec; }
-    void SetUpVec(D3DXVECTOR3 & UpVec)                  { pData->UpVec = UpVec; }
-
-    D3DXVECTOR3 & GetLookVec(void)                      { return pData->LookVec; }
-    void SetLookVec(D3DXVECTOR3 & LookVec)              { pData->LookVec = LookVec; }
-    
-    D3DXVECTOR3 & GetRightVec(void)                     { return pData->RightVec; }
-    void SetRightVec(D3DXVECTOR3 & RightVec)            { pData->RightVec = RightVec; }
-    
-    D3DXVECTOR3 & GetEyePt(void)                        { return pData->EyePt; }
-    void SetEyePt(D3DXVECTOR3 & EyePt)                  { pData->EyePt = EyePt; }
-    
-    D3DXVECTOR3 & GetLightLookAtPt(void)                { return pData->LightLookAtPt; }
-    void SetLightLookAtPt(D3DXVECTOR3 & LightLookAtPt)  { pData->LightLookAtPt = LightLookAtPt; }
-    
-    D3DXMATRIX & GetViewMatrix(void)                    { return pData->matView; }
-    void SetViewMatrix(D3DXMATRIX & matView)            { pData->matView = matView; }
-
-    TKSGObject * GetLookAtObject(void)            { return pData->pSGObject; }
-    void SetLookAtObject(TKSGObject *pSGObject)   { pData->pSGObject = pSGObject; }
+    XMVECTOR	UpVec;
+	XMVECTOR	LookVec;
+	XMVECTOR	RightVec;
+	XMVECTOR	EyePt;
+	XMVECTOR	LightLookAtPt;
+	XMVECTOR	matView;
+    //TKSGObject *pSGObject;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -82,23 +43,23 @@ public:
         SAMETYPEMEMCPY( ((TKCameraRSObject*)pRSObject)->pData, this->pData );
     }
     
-    D3DXVECTOR3 & GetUpVec(void)                        { return pData->UpVec; }
-    void SetUpVec(D3DXVECTOR3 & UpVec)                  { pData->UpVec = UpVec; }
+    XMVECTOR & GetUpVec(void)                        { return pData->UpVec; }
+    void SetUpVec(XMVECTOR & UpVec)                  { pData->UpVec = UpVec; }
 
-    D3DXVECTOR3 & GetLookVec(void)                      { return pData->LookVec; }
-    void SetLookVec(D3DXVECTOR3 & LookVec)              { pData->LookVec = LookVec; }
+    XMVECTOR & GetLookVec(void)                      { return pData->LookVec; }
+    void SetLookVec(XMVECTOR & LookVec)              { pData->LookVec = LookVec; }
     
-    D3DXVECTOR3 & GetRightVec(void)                     { return pData->RightVec; }
-    void SetRightVec(D3DXVECTOR3 & RightVec)            { pData->RightVec = RightVec; }
+    XMVECTOR & GetRightVec(void)                     { return pData->RightVec; }
+    void SetRightVec(XMVECTOR & RightVec)            { pData->RightVec = RightVec; }
     
-    D3DXVECTOR3 & GetEyePt(void)                        { return pData->EyePt; }
-    void SetEyePt(D3DXVECTOR3 & EyePt)                  { pData->EyePt = EyePt; }
+    XMVECTOR & GetEyePt(void)                        { return pData->EyePt; }
+    void SetEyePt(XMVECTOR & EyePt)                  { pData->EyePt = EyePt; }
     
-    D3DXVECTOR3 & GetLightLookAtPt(void)                { return pData->LightLookAtPt; }
-    void SetLightLookAtPt(D3DXVECTOR3 & LightLookAtPt)  { pData->LightLookAtPt = LightLookAtPt; }
+    XMVECTOR & GetLightLookAtPt(void)                { return pData->LightLookAtPt; }
+    void SetLightLookAtPt(XMVECTOR & LightLookAtPt)  { pData->LightLookAtPt = LightLookAtPt; }
 
-    D3DXMATRIX & GetViewMatrix(void)                    { return pData->matView; }
-    void SetViewMatrix(D3DXMATRIX & matView)            { pData->matView = matView; }
+    XMMATRIX & GetViewMatrix(void)                    { return pData->matView; }
+    void SetViewMatrix(XMMATRIX & matView)            { pData->matView = matView; }
 
     TKSGObject * GetLookAtObject(void)            { return pData->pSGObject; }
     void SetLookAtObject(TKSGObject *pSGObject)   { pData->pSGObject = pSGObject; }
@@ -111,6 +72,11 @@ class TKCamera : public TKEngineObject
 {
     void SetRes(TKEngineResource * pRes)    {;}
     TKEngineResource * GetRes(void)         {return NULL;}
+
+protected:
+	ST_CAMERADATA   *pData;
+
+	void SetViewMatrix(void);
     
 public:
     TKCamera(TKEngine *pEngine, TKEngineObject *pParent, int ID, int Seq)
@@ -126,6 +92,27 @@ public:
 
     virtual void BeforeInit(void) = 0;
     virtual void AfterInit(void) = 0;   
+
+	XMVECTOR & GetUpVec(void) { return pData->UpVec; }
+	void SetUpVec(XMVECTOR & UpVec) { pData->UpVec = UpVec; }
+
+	XMVECTOR & GetLookVec(void) { return pData->LookVec; }
+	void SetLookVec(XMVECTOR & LookVec) { pData->LookVec = LookVec; }
+
+	XMVECTOR & GetRightVec(void) { return pData->RightVec; }
+	void SetRightVec(XMVECTOR & RightVec) { pData->RightVec = RightVec; }
+
+	XMVECTOR & GetEyePt(void) { return pData->EyePt; }
+	void SetEyePt(XMVECTOR & EyePt) { pData->EyePt = EyePt; }
+
+	XMVECTOR & GetLightLookAtPt(void) { return pData->LightLookAtPt; }
+	void SetLightLookAtPt(XMVECTOR & LightLookAtPt) { pData->LightLookAtPt = LightLookAtPt; }
+
+	XMMATRIX & GetViewMatrix(void) { return pData->matView; }
+	void SetViewMatrix(XMMATRIX & matView) { pData->matView = matView; }
+
+	TKSGObject * GetLookAtObject(void) { return pData->pSGObject; }
+	void SetLookAtObject(TKSGObject *pSGObject) { pData->pSGObject = pSGObject; }
 };
 
 //////////////////////////////////////////////////////////////////////////////

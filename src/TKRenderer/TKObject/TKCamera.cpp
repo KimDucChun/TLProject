@@ -25,10 +25,10 @@ TKCameraFSObject::TKCameraFSObject(TKEngine *pEngine, TKEngineObject *pParent)
     pData = new ST_CAMERADATA;
     memset(pData, 0, sizeof(ST_CAMERADATA));
 
-    D3DXVECTOR3 LookAtPt(0.0f, 0.0f, 0.0f);
+    XMVECTOR LookAtPt(0.0f, 0.0f, 0.0f);
     
-    pData->EyePt = D3DXVECTOR3(0.0f, 0.0f, -100.0f);
-    pData->UpVec = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+    pData->EyePt = XMVECTOR(0.0f, 0.0f, -100.0f);
+    pData->UpVec = XMVECTOR(0.0f, 1.0f, 0.0f);
     pData->LookVec = LookAtPt - pData->EyePt;
 }
 
@@ -39,7 +39,7 @@ TKCameraFSObject::~TKCameraFSObject(void)
 
 void TKCameraFSObject::SetViewMatrix(void)
 {
-    //ZeroMemory(&pData->matView, sizeof(D3DXMATRIX));
+    //ZeroMemory(&pData->matView, sizeof(XMMATRIX));
     //D3DXMatrixLookAtLH(&pData->matView, &pData->EyePt, &pData->LookVec, &pData->UpVec);
     
     D3DXMatrixIdentity(&pData->matView);

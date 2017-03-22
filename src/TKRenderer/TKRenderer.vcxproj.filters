@@ -52,6 +52,9 @@
     <ClCompile Include="TKObject\TKEngineResource.cpp">
       <Filter>TKObject</Filter>
     </ClCompile>
+    <ClCompile Include="TKObject\TKEngineObjectList.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TKCommon.h" />
@@ -101,6 +104,9 @@
       <Filter>TKObject</Filter>
     </ClInclude>
     <ClInclude Include="TKObject\TKEngineResource.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKEngineObjectList.h">
       <Filter>TKObject</Filter>
     </ClInclude>
   </ItemGroup>

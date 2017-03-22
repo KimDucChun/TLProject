@@ -93,6 +93,7 @@
     <ClCompile Include="TKObject\TKEngine.cpp" />
     <ClCompile Include="TKObject\TKEngine2.cpp" />
     <ClCompile Include="TKObject\TKEngineObject.cpp" />
+    <ClCompile Include="TKObject\TKEngineObjectList.cpp" />
     <ClCompile Include="TKObject\TKEngineResource.cpp" />
     <ClCompile Include="TKObject\TKIMEInput.cpp" />
     <ClCompile Include="TKObject\TKInput.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="TKObject\TKEngine2.h" />
     <ClInclude Include="TKObject\TKEngine2.hpp" />
     <ClInclude Include="TKObject\TKEngineObject.h" />
+    <ClInclude Include="TKObject\TKEngineObjectList.h" />
     <ClInclude Include="TKObject\TKEngineResource.h" />
     <ClInclude Include="TKObject\TKIMEInput.h" />
     <ClInclude Include="TKObject\TKInput.h" />

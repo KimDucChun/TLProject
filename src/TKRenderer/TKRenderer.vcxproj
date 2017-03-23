@@ -97,9 +97,11 @@
     <ClCompile Include="TKObject\TKEngineResource.cpp" />
     <ClCompile Include="TKObject\TKIMEInput.cpp" />
     <ClCompile Include="TKObject\TKInput.cpp" />
+    <ClCompile Include="TKObject\TKMeshResource.cpp" />
     <ClCompile Include="TKObject\TKTexture.cpp" />
     <ClCompile Include="TKObject\TKThread.cpp" />
     <ClCompile Include="TKObject\TKTime.cpp" />
+    <ClCompile Include="TKObject\TKVertexResource.cpp" />
     <ClCompile Include="TKWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +110,6 @@
     <ClInclude Include="TKObject.h" />
     <ClInclude Include="TKObject\TKBaseObject.h" />
     <ClInclude Include="TKObject\TKCamera.h" />
-    <ClInclude Include="TKObject\TKCamera.hpp" />
     <ClInclude Include="TKObject\TKD3D.h" />
     <ClInclude Include="TKObject\TKEngine.h" />
     <ClInclude Include="TKObject\TKEngine.hpp" />
@@ -119,9 +120,13 @@
     <ClInclude Include="TKObject\TKEngineResource.h" />
     <ClInclude Include="TKObject\TKIMEInput.h" />
     <ClInclude Include="TKObject\TKInput.h" />
+    <ClInclude Include="TKObject\TKMesh.h" />
+    <ClInclude Include="TKObject\TKMesh.hpp" />
+    <ClInclude Include="TKObject\TKMeshResource.h" />
     <ClInclude Include="TKObject\TKTexture.h" />
     <ClInclude Include="TKObject\TKThread.h" />
     <ClInclude Include="TKObject\TKTime.h" />
+    <ClInclude Include="TKObject\TKVertexResource.h" />
     <ClInclude Include="TKWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

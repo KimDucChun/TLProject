@@ -593,3 +593,7 @@ void ExtractFileExt( const char *pSrc, char *pResult );
 // 전체 파일명에서 경로만 가져오기
 void ExtractFileDir( const char *pSrc, char *pResult );
 
+#define _mX m128_f32[0]
+#define _mY m128_f32[1]
+#define _mZ m128_f32[2]
+#define _mW m128_f32[3]

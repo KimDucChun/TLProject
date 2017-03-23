@@ -12,27 +12,21 @@ private:
     friend class TKEngine;
     
 protected:
-    TKEngineObject                 *pOwner;
+    TKEngineObject*								m_pOwner;
     
-    vector<TKEngineObject*>         NewEngineObjects;
+    vector<TKEngineObject*>						m_NewEngineObjects;
 
-    unordered_map<int, TKEngineObject*>       EngineObjects_ID;
-    unordered_map<string, TKEngineObject*>    EngineObjects_Name;
+    unordered_map<int, TKEngineObject*>			m_EngineObjects_ID;
+    unordered_map<string, TKEngineObject*>		m_EngineObjects_Name;
 
-    unordered_map<int, TKFrameSideObject*>    FrameSideObjects_ID;
-    unordered_map<int, TKRenderSideObject*>   RenderSideObjects_ID;
-    vector<TKRenderSideObject*>     RenderSideObjects_Array;
+    vector<TKEngineObject*>						m_EraseList;
+    vector<TKEngineObject*>						m_DelList;
 
-    vector<TKEngineObject*>         EraseList;
-    vector<TKEngineObject*>         DelList;
+    TKCriticalSection							CSE;
 
-    TKCriticalSection   CSE;
-    TKCriticalSection   CSF;
-    TKCriticalSection   CSR;
+    bool										m_OwnerContainer;
 
-    bool OwnerContainer;
-
-    static bool CompareObjectSeq(TKRenderSideObject *pA, TKRenderSideObject *pB);
+    static bool CompareObjectSeq(TKEngineObject *pA, TKEngineObject *pB);
 
 protected:
     vector<TKEngineObject*>::iterator itNew;
@@ -41,17 +35,13 @@ protected:
     
     unordered_map<int, TKEngineObject*>::iterator itID;
     unordered_map<string, TKEngineObject*>::iterator itName;
-    unordered_map<int, TKFrameSideObject*>::iterator itFrame;
-    unordered_map<int, TKRenderSideObject*>::iterator itRender;
     vector<TKRenderSideObject*>::iterator itArray;
     
     pair<unordered_map<int, TKEngineObject*>::iterator, bool> Rtn_ID;
     pair<unordered_map<string, TKEngineObject*>::iterator, bool> Rtn_Name;
-    pair<unordered_map<int, TKFrameSideObject*>::iterator, bool> Rtn_FS;
-    pair<unordered_map<int, TKRenderSideObject*>::iterator, bool> Rtn_RS;
 
 public:
-    TKEngineObjectList( TKEngine *pEngine, TKEngineObject *pOwner, bool OwnerContainer );
+    TKEngineObjectList(TKEngineObject *pOwner, bool OwnerContainer);
     virtual ~TKEngineObjectList(void);
 
     // 객체 생성 함수(OwnerContainer 값이 true 일 경우만 사용가능)
@@ -114,20 +104,14 @@ public:
     TKEngineObject * ItemBySeq(int Seq);
     template <typename ENGINEOBJECT> ENGINEOBJECT * ItemBySeq(int Seq);
 
-    TKFrameSideObject * FSObject(int ID);
-    template <typename FSOBJECT> FSOBJECT * FSObject(int ID);
-
-    TKRenderSideObject * RSObject(int ID);
-    template <typename RSOBJECT> RSOBJECT * RSObject(int ID);
-
     TKEngineObject * operator [] (int Seq);
 
     void ClearDelete(void);
     
-    void SetOwnerContainer(bool OwnerContainer) { this->OwnerContainer = OwnerContainer; }
+    void SetOwnerContainer(bool OwnerContainer) { this->m_OwnerContainer = OwnerContainer; }
     
-    TKEngineObject * GetOwner(void)             { return pOwner; }
-    void SetOwner(TKEngineObject * pOwner)      { this->pOwner = pOwner; }
+    TKEngineObject * GetOwner(void)             { return m_pOwner; }
+    void SetOwner(TKEngineObject * pOwner)      { this->m_pOwner = pOwner; }
 };
 
 ///////////
@@ -138,8 +122,8 @@ template <class ENGINEOBJECT> ENGINEOBJECT * TKEngineObjectList::New(int Seq)
 {
     ENGINEOBJECT *pObject = NULL;
     CSE.Enter();
-    pObject = new ENGINEOBJECT(GetEngine(), pOwner, GENID, Seq);
-    NewEngineObjects.push_back( pObject );
+    pObject = new ENGINEOBJECT(GetEngine(), m_pOwner, GENID, Seq);
+    m_NewEngineObjects.push_back( pObject );
     CSE.Leave();
     return pObject;   
 }
@@ -153,9 +137,9 @@ template <class ENGINEOBJECT> ENGINEOBJECT * TKEngineObjectList::New(int Seq, in
 
     CSE.Enter();
 
-    itID = EngineObjects_ID.find( ID );
-    itName = EngineObjects_Name.find( NodeName );
-    for ( itNew = NewEngineObjects.begin() ; itNew != NewEngineObjects.end() ; ++itNew )
+    itID = m_EngineObjects_ID.find( ID );
+    itName = m_EngineObjects_Name.find( NodeName );
+    for ( itNew = m_NewEngineObjects.begin() ; itNew != m_NewEngineObjects.end() ; ++itNew )
     {
         if ( ((*itNew)->GetNodeName() == NodeName && !NodeName.empty()) || (*itNew)->GetID() == ID )
         {
@@ -163,11 +147,11 @@ template <class ENGINEOBJECT> ENGINEOBJECT * TKEngineObjectList::New(int Seq, in
         }
     }
 
-    if ( itID == EngineObjects_ID.end() && itName == EngineObjects_Name.end() && itNew == NewEngineObjects.end() )
+    if ( itID == m_EngineObjects_ID.end() && itName == m_EngineObjects_Name.end() && itNew == m_NewEngineObjects.end() )
     {
-        pObject = new ENGINEOBJECT(GetEngine(), pOwner, GENID, Seq);
+        pObject = new ENGINEOBJECT(GetEngine(), m_pOwner, GENID, Seq);
         pObject->SetNodeName( NodeName );
-        NewEngineObjects.push_back( pObject );
+        m_NewEngineObjects.push_back( pObject );
     }
 
     CSE.Leave();
@@ -183,8 +167,8 @@ template <class ENGINEOBJECT> ENGINEOBJECT * TKEngineObjectList::New(int Seq, st
 
     CSE.Enter();
 
-    itName = EngineObjects_Name.find( NodeName );
-    for ( itNew = NewEngineObjects.begin() ; itNew != NewEngineObjects.end() ; ++itNew )
+    itName = m_EngineObjects_Name.find( NodeName );
+    for ( itNew = m_NewEngineObjects.begin() ; itNew != m_NewEngineObjects.end() ; ++itNew )
     {
         if ( (*itNew)->GetNodeName() == NodeName )
         {
@@ -192,11 +176,11 @@ template <class ENGINEOBJECT> ENGINEOBJECT * TKEngineObjectList::New(int Seq, st
         }
     }
 
-    if ( itName == EngineObjects_Name.end() && itNew == NewEngineObjects.end() )
+    if ( itName == m_EngineObjects_Name.end() && itNew == m_NewEngineObjects.end() )
     {
-        pObject = new ENGINEOBJECT(GetEngine(), pOwner, GENID, Seq);
+        pObject = new ENGINEOBJECT(GetEngine(), m_pOwner, GENID, Seq);
         pObject->SetNodeName( NodeName );
-        NewEngineObjects.push_back( pObject );
+        m_NewEngineObjects.push_back( pObject );
     }
 
     CSE.Leave();
@@ -217,14 +201,4 @@ template <typename ENGINEOBJECT> ENGINEOBJECT * TKEngineObjectList::Item(string 
 template <typename ENGINEOBJECT> ENGINEOBJECT * TKEngineObjectList::ItemBySeq(int Seq)
 {
     return (ENGINEOBJECT *)this->ItemBySeq(Seq);
-}
-
-template <typename FSOBJECT> FSOBJECT * TKEngineObjectList::FSObject(int ID)
-{
-    return (FSOBJECT *)this->FSObject(ID);
-}
-
-template <typename RSOBJECT> RSOBJECT * TKEngineObjectList::RSObject(int ID)
-{
-    return (RSOBJECT *)this->RSObject(ID);
 }

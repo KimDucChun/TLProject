@@ -55,6 +55,12 @@
     <ClCompile Include="TKObject\TKEngineObjectList.cpp">
       <Filter>TKObject</Filter>
     </ClCompile>
+    <ClCompile Include="TKObject\TKMeshResource.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKVertexResource.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TKCommon.h" />
@@ -97,9 +103,6 @@
     <ClInclude Include="TKObject\TKCamera.h">
       <Filter>TKObject</Filter>
     </ClInclude>
-    <ClInclude Include="TKObject\TKCamera.hpp">
-      <Filter>TKObject</Filter>
-    </ClInclude>
     <ClInclude Include="TKObject\TKEngineObject.h">
       <Filter>TKObject</Filter>
     </ClInclude>
@@ -107,6 +110,18 @@
       <Filter>TKObject</Filter>
     </ClInclude>
     <ClInclude Include="TKObject\TKEngineObjectList.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKMesh.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKMesh.hpp">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKMeshResource.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKVertexResource.h">
       <Filter>TKObject</Filter>
     </ClInclude>
   </ItemGroup>

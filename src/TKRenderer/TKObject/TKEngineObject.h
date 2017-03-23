@@ -13,7 +13,6 @@ class TKEngineObject : public TKBaseObject
 {
     friend class TKEngineObjectList;
 private:
-    void Frame(void) {;}        // 사용안함
     
     int					m_Seq;
     TKEngineObject      *m_pParent;

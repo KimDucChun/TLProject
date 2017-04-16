@@ -85,19 +85,37 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Collision\FaceVSFace.cpp" />
+    <ClCompile Include="Collision\OBBVSFace.cpp" />
+    <ClCompile Include="Collision\OBBVSOBB.cpp" />
+    <ClCompile Include="Collision\RayVSFace.cpp" />
+    <ClCompile Include="Collision\RayVSOBB.cpp" />
+    <ClCompile Include="Collision\RayVSSphere.cpp" />
+    <ClCompile Include="Collision\SphereVSFace.cpp" />
+    <ClCompile Include="Collision\SphereVSOBB.cpp" />
+    <ClCompile Include="Collision\SphereVSSphere.cpp" />
+    <ClCompile Include="Mathmatics\Bounding.cpp" />
+    <ClCompile Include="Mathmatics\Eigen.cpp" />
     <ClCompile Include="TKCommon.cpp" />
     <ClCompile Include="TKObject.cpp" />
     <ClCompile Include="TKObject\TKBaseObject.cpp" />
+    <ClCompile Include="TKObject\TKBaseObjectList.cpp" />
     <ClCompile Include="TKObject\TKCamera.cpp" />
+    <ClCompile Include="TKObject\TKCollisionResource.cpp" />
     <ClCompile Include="TKObject\TKD3D.cpp" />
     <ClCompile Include="TKObject\TKEngine.cpp" />
     <ClCompile Include="TKObject\TKEngine2.cpp" />
     <ClCompile Include="TKObject\TKEngineObject.cpp" />
     <ClCompile Include="TKObject\TKEngineObjectList.cpp" />
     <ClCompile Include="TKObject\TKEngineResource.cpp" />
+    <ClCompile Include="TKObject\TKFile.cpp" />
+    <ClCompile Include="TKObject\TKFileConvertClasses.cpp" />
+    <ClCompile Include="TKObject\TKFileIOClasses.cpp" />
+    <ClCompile Include="TKObject\TKFileStruct.cpp" />
     <ClCompile Include="TKObject\TKIMEInput.cpp" />
     <ClCompile Include="TKObject\TKInput.cpp" />
     <ClCompile Include="TKObject\TKMeshResource.cpp" />
+    <ClCompile Include="TKObject\TKShaderResource.cpp" />
     <ClCompile Include="TKObject\TKTexture.cpp" />
     <ClCompile Include="TKObject\TKThread.cpp" />
     <ClCompile Include="TKObject\TKTime.cpp" />
@@ -105,11 +123,19 @@
     <ClCompile Include="TKWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Collision\CollisionCheck.h" />
+    <ClInclude Include="Mathmatics\Bounding.h" />
+    <ClInclude Include="Mathmatics\Eigen.h" />
+    <ClInclude Include="Mathmatics\Vector3.h" />
     <ClInclude Include="TKCommon.h" />
+    <ClInclude Include="TKContainer.h" />
+    <ClInclude Include="TKContainer.hpp" />
     <ClInclude Include="TKInterface.h" />
     <ClInclude Include="TKObject.h" />
     <ClInclude Include="TKObject\TKBaseObject.h" />
+    <ClInclude Include="TKObject\TKBaseObjectList.h" />
     <ClInclude Include="TKObject\TKCamera.h" />
+    <ClInclude Include="TKObject\TKCollisionResource.h" />
     <ClInclude Include="TKObject\TKD3D.h" />
     <ClInclude Include="TKObject\TKEngine.h" />
     <ClInclude Include="TKObject\TKEngine.hpp" />
@@ -118,11 +144,17 @@
     <ClInclude Include="TKObject\TKEngineObject.h" />
     <ClInclude Include="TKObject\TKEngineObjectList.h" />
     <ClInclude Include="TKObject\TKEngineResource.h" />
+    <ClInclude Include="TKObject\TKFile.h" />
+    <ClInclude Include="TKObject\TKFileConvertClasses.h" />
+    <ClInclude Include="TKObject\TKFileConvertClasses.hpp" />
+    <ClInclude Include="TKObject\TKFileIOClasses.h" />
+    <ClInclude Include="TKObject\TKFileStruct.h" />
     <ClInclude Include="TKObject\TKIMEInput.h" />
     <ClInclude Include="TKObject\TKInput.h" />
     <ClInclude Include="TKObject\TKMesh.h" />
     <ClInclude Include="TKObject\TKMesh.hpp" />
     <ClInclude Include="TKObject\TKMeshResource.h" />
+    <ClInclude Include="TKObject\TKShaderResource.h" />
     <ClInclude Include="TKObject\TKTexture.h" />
     <ClInclude Include="TKObject\TKThread.h" />
     <ClInclude Include="TKObject\TKTime.h" />

@@ -2,6 +2,9 @@
 
 #pragma warning(disable:4996) 
 #pragma warning(disable:4005)
+#pragma warning(disable:4838)
+#pragma warning(disable:4101)
+
 
 //#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
 
@@ -48,17 +51,20 @@
 #define PUSHKEY	0x40
 #define HOLDKEY	0x80
 
+#include <windows.h>
+//#include <xnamath.h>
+//#include <d3dxmath.h>
+#include <DirectXMath.h>
+#include <d3dx9math.h>
+
 #ifdef DEBUG_MODE
     #define CRTDBG_MAP_ALLOC #include <stdlib.h> #include <crtdbg.h>
     #include <malloc.h>
 #endif DEBUG_MODE
 
-#include <windows.h>
-#include <crtdbg.h>
-#include <atlstr.h>
-#include <ASSERT.h>
+#include <assert.h>
 #include <stdio.h>
-//#include <d3dxmath.h>
+
 #include <tchar.h>
 
 #if defined(TK_D3D9)
@@ -66,15 +72,14 @@
 	#include <D3d9.h>
 #elif defined(TK_D3D11)
 	#include <dxgi.h>
+	#include <dxgitype.h>
 	#include <d3dcommon.h>
 	#include <d3d11.h>
-	#include <d3d11_1.h>
-	#include <DirectXMath.h>
-	
-	//#include <xnamath.h>
+	//#include <d3d11_1.h>
+	//#include <d3d11_2.h>
 #endif
 
-#include <d3d9types.h>
+//#include <d3d9types.h>
 #include <dinput.h>
 #include <process.h>
 #include <mmsystem.h>
@@ -89,14 +94,14 @@
 #include <algorithm>
 #include <string>
 
-//#include "./TKContainer.h"
+#include "./TKContainer.h"
 
-//#include "./Mathmatics/Bounding.h"
-//#include "./Mathmatics/Eigen.h"
-//#include "./Mathmatics/Vector3.h"
-//#include "./Collision/CollisionCheck.h"
+#include "./Mathmatics/Bounding.h"
+#include "./Mathmatics/Eigen.h"
+#include "./Mathmatics/Vector3.h"
+#include "./Collision/CollisionCheck.h"
 
-//using namespace KContainer;
+using namespace KContainer;
 using namespace std;
 using namespace DirectX;
 
@@ -297,10 +302,7 @@ public:
 	T y;
 	T z;
 
-	_Unknown_Vector3(void)
-	{
-		:x(0), y(0), z(0)
-	}
+	_Unknown_Vector3(void):x(0), y(0), z(0)	{}
 	_Unknown_Vector3(_Unknown_Vector3<T> & AData)
 	{
 		(*this) = AData;
@@ -321,45 +323,131 @@ public:
 	}
 };
 
-typedef _Unknown_Vector3<int> INT_VECTOR3;
-typedef vector<INT_VECTOR3> INT_VECTOR3S;
+typedef _Unknown_Vector3<int>	INT_VECTOR3;
+typedef vector<INT_VECTOR3>		INT_VECTOR3S;
 
 typedef _Unknown_Vector3<float> FLOAT_VECTOR3;
-typedef vector<FLOAT_VECTOR3> FLOAT_VECTOR3S;
+typedef vector<FLOAT_VECTOR3>	FLOAT_VECTOR3S;
 
-//class INT_VECTOR3
-//{
-//public:
-//	int x;
-//	int y;
-//	int z;
+typedef vector<D3DXVECTOR2>		D3DXVECTOR2S;
+typedef vector<D3DXVECTOR3>		D3DXVECTOR3S;
+typedef vector<D3DXVECTOR4>		D3DXVECTOR4S;
+
+//typedef XMFLOAT3				D3DXVECTOR3;
+//typedef vector<XMFLOAT3>		D3DXVECTOR3S;
 //
-//	INT_VECTOR3(void);
-//	INT_VECTOR3(INT_VECTOR3 & AData);
-//	INT_VECTOR3(int x, int y, int z);
-//	~INT_VECTOR3(void);
+//typedef XMFLOAT4				D3DXVECTOR4;
+//typedef vector<XMFLOAT4>		D3DXVECTOR4S;
 //
-//	bool operator == (INT_VECTOR3 & AData);
-//	bool operator != (INT_VECTOR3 & AData);
-//};
-//typedef vector<INT_VECTOR3> INT_VECTOR3S;
+//typedef XMFLOAT2				D3DXVECTOR2;
+//typedef vector<XMFLOAT2>		D3DXVECTOR2S;
 //
-//class FLOAT_VECTOR3
-//{
-//public:
-//	int x;
-//	int y;
-//	int z;
+//typedef XMMATRIX				D3DXMATRIX;
 //
-//	FLOAT_VECTOR3(void);
-//	FLOAT_VECTOR3(FLOAT_VECTOR3 & AData);
-//	FLOAT_VECTOR3(int x, int y, int z);
-//	~FLOAT_VECTOR3(void);
-//
-//	bool operator == (FLOAT_VECTOR3 & AData);
-//	bool operator != (FLOAT_VECTOR3 & AData);
-//};
-//typedef vector<FLOAT_VECTOR3> FLOAT_VECTOR3S;
+//typedef XMCOLOR					D3DCOLOR;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// 공통 버텍스 버퍼
+///////////////////////////////////////////////////////////////////////////////////////////////////
+struct ST_VB_POS
+{
+#ifdef TK_D3D9
+	enum { FVF = (D3DFVF_XYZ) };
+#endif
+	D3DXVECTOR3 Pos;
+};
+
+struct ST_VB_POSDIF
+{
+#ifdef TK_D3D9
+	enum { FVF = (D3DFVF_XYZ | D3DFVF_DIFFUSE) };
+#endif
+	D3DXVECTOR3 Pos;
+	D3DCOLOR    Color;
+};
+
+struct ST_VB_POSTEX
+{
+#ifdef TK_D3D9
+	enum { FVF = (D3DFVF_XYZ | D3DFVF_TEX1) };
+#endif
+	D3DXVECTOR3 Pos;
+	D3DXVECTOR2 Tex;
+};
+
+struct ST_VB_POSNORDIFTEX
+{
+#ifdef TK_D3D9
+	enum { FVF = (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX1) };
+#endif
+	D3DXVECTOR3 Pos;
+	D3DXVECTOR3 Normal;
+	D3DCOLOR    Color;
+	D3DXVECTOR2 Tex;
+};
+
+struct ST_VB_POSNORDIF
+{
+#ifdef TK_D3D9
+	enum { FVF = (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE) };
+#endif
+	D3DXVECTOR3 Pos;
+	D3DXVECTOR3 Normal;
+	D3DCOLOR    Color;
+};
+
+struct ST_VB_POSNORTEX
+{
+#ifdef TK_D3D9
+	enum { FVF = (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1) };
+#endif
+	D3DXVECTOR3 Pos;
+	D3DXVECTOR3 Normal;
+	D3DXVECTOR2 Tex;
+};
+
+struct ST_VB_RHWTEX
+{
+#ifdef TK_D3D9
+	enum { FVF = (D3DFVF_XYZRHW | D3DFVF_TEX1) };
+#endif
+	D3DXVECTOR4 Pos;
+	D3DXVECTOR2 Tex;
+};
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// 지오메트리 데이터 구조체
+///////////////////////////////////////////////////////////////////////////////////////////////////
+struct ST_ANIMATRIX
+{
+	int         Frame;
+	D3DMATRIX	matAni;
+};
+
+struct ST_MESHMATRIXINDEX
+{
+	byte x;
+	byte y;
+	byte z;
+	byte w;
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// 공통 인덱스 버퍼
+///////////////////////////////////////////////////////////////////////////////////////////////////
+struct ST_IB_TRIANGLE
+{
+	WORD _0, _1, _2;
+	ST_IB_TRIANGLE(void) { ZeroMemory(this, sizeof(ST_IB_TRIANGLE)); }
+};
+
+struct ST_IB_LINE
+{
+	WORD _0, _1;
+	ST_IB_LINE(void) { ZeroMemory(this, sizeof(ST_IB_LINE)); }
+};
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // 객체 인스턴스 관리 템플릿
@@ -597,3 +685,6 @@ void ExtractFileDir( const char *pSrc, char *pResult );
 #define _mY m128_f32[1]
 #define _mZ m128_f32[2]
 #define _mW m128_f32[3]
+
+// OBB 추출 함수
+bool BuildOBB(D3DXVECTOR3S & PosList, D3DXVECTOR3 & vecCenter, D3DXVECTOR3 vecAxis[3], float AxisLen[3], D3DXVECTOR3 vecOBB[8]);

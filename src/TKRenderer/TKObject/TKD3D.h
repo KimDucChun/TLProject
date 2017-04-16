@@ -8,11 +8,11 @@ class TKD3D : public TKBaseObject
 {
 protected:
 	ID3D11Device*			m_pD3D;
-	ID3D11Device1*          m_pD3D1;
+	//ID3D11Device1*          m_pD3D1;
 	ID3D11DeviceContext*	m_pD3DImmediateContext;
-	ID3D11DeviceContext1*	m_pD3DImmediateContext1;
+	//ID3D11DeviceContext1*	m_pD3DImmediateContext1;
 	IDXGISwapChain*			m_pSwapChain;
-	IDXGISwapChain1*        m_pSwapChain1;
+	//IDXGISwapChain1*        m_pSwapChain1;
 	ID3D11RenderTargetView* m_pRenderTargetView;
 	ID3D11Texture2D*		m_pDepthStencilBuffer;
 	ID3D11DepthStencilView* m_pDepthStencilView;

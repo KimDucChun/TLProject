@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TKEngineResource.h"
-#include "TKShaderResource.h"
+//#include "TKShaderResource.h"
 #include "TKVertexResource.h"
 #include "TKTexture.h"
 
@@ -122,11 +122,20 @@ public:
 
 struct ST_GEOM_VERTEX
 {
-    D3DXVECTOR3             Pos;
+	XMVECTOR				Pos;
     ST_GEOM_VERTEX_WEIGHT   Weights[4];
 
-    ST_GEOM_VERTEX(void):Pos(0.0f,0.0f,0.0f){ ; }
-    ST_GEOM_VERTEX(const ST_GEOM_VERTEX & st_Geom_Vertex):Pos(0.0f,0.0f,0.0f){ (*this) = st_Geom_Vertex; }
+    ST_GEOM_VERTEX(void)
+	{
+		Pos._mX = 0.0f;
+		Pos._mY = 0.0f;
+		Pos._mZ = 0.0f;
+		Pos._mW = 0.0f;	
+	}
+	ST_GEOM_VERTEX(const ST_GEOM_VERTEX & st_Geom_Vertex)
+	{
+		(*this) = st_Geom_Vertex;
+	}
     ~ST_GEOM_VERTEX(void){;}
 
     void ResetWeights(void)
@@ -179,7 +188,7 @@ protected:
 
     MATERIALLIST    MaterialList;
 
-    TKMeshMaterial(TKEngine *pEngine, string NodeName);
+    TKMeshMaterial(string NodeName);
     virtual ~TKMeshMaterial(void);
 public:
 
@@ -257,7 +266,7 @@ protected:
     vector<ST_GEOM_VERTEX>      OriginVertexList;   // 오리지널 버텍스 정보와, 가중치 정보를 가지고 있는 구조체
 
     // 이하 리스트들은 Release 시에 초기화 하면 안된다.
-    D3DXVECTOR3S                PosList;            // 버텍스 Pos 리스트
+	D3DXVECTOR3S                PosList;            // 버텍스 Pos 리스트
     vector<D3DXVECTOR4>         MatrixWeightList;   // 버텍스당 매트릭스 애니메이션 가중치
     vector<ST_MESHMATRIXINDEX>  MatrixIndexList;    // 버텍스당 매트릭스 애니메이션 인덱스
     vector<D3DXVECTOR2>         TexPosList;         // 텍스쳐 좌표 리스트
@@ -280,7 +289,7 @@ protected:
     bool InitVertexFormat(void);
     bool InitVertexBuffers(void);
     
-    TKMeshVertexes(TKEngine *pEngine, int ID);
+    TKMeshVertexes(int ID);
     virtual ~TKMeshVertexes(void);
 public:
 
@@ -374,7 +383,7 @@ protected:
     bool InitIndexBuffers(void);
     bool InitNormalSmoothing(void); //노말 벡터의 합을 정규화하고, FaceNormal정보를 생성함.
 
-    TKMeshFaces(TKEngine *pEngine, int ID);
+    TKMeshFaces(int ID);
     virtual ~TKMeshFaces(void);
 public:
 
@@ -414,7 +423,7 @@ protected:
     // Init 하기 전에 사용자가 메서드를 이용하여 직접 값을 넣어야 하는 값들.
     TKMeshShaderEffect         *pShaderEffect;      // 렌더링시 사용할 이펙트쉐이더 객체포인터 <- 포인터 복사 가능
 
-    TKMeshGeometry(TKEngine *pEngine, string NodeName);
+    TKMeshGeometry(string NodeName);
     virtual ~TKMeshGeometry(void);
 public:
 
@@ -542,7 +551,7 @@ protected:
     void MaterialBind(GEOMLIST & ParamList);        // 메쉬와 메터리얼을 바인드    
 
 public:
-    TKMeshRes(TKEngine *pEngine, int ID);
+    TKMeshRes(int ID);
     virtual ~TKMeshRes(void);
 
     virtual void Init(void);
@@ -629,7 +638,7 @@ protected:
     void MeshAnimationBind(void);                   // 메쉬와 애니메이션을 바인드(Mesh의 애니메이션 인덱스를 채워줌)
 
 public:
-    TKAniMeshRes(TKEngine *pEngine, int ID);
+    TKAniMeshRes(int ID);
     virtual ~TKAniMeshRes(void);
 
     void Init(void);

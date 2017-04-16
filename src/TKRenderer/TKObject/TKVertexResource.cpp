@@ -4,8 +4,8 @@
 /////////////////////////////////////////////////////////////////////
 // TKVertexResource
 /////////////////////////////////////////////////////////////////////
-TKVertexResource::TKVertexResource(TKEngine *pEngine, int ID)
-	:TKEngineResource(pEngine, ID)
+TKVertexResource::TKVertexResource(int ID)
+	:TKEngineResource(ID)
 #ifdef TK_D3D9
 	,pVB(NULL)
 	,pVDEC(NULL)
@@ -40,8 +40,8 @@ void TKVertexResource::Release(void)
 /////////////////////////////////////////////////////////////////////
 // TKIndexResource
 /////////////////////////////////////////////////////////////////////
-TKIndexResource::TKIndexResource(TKEngine *pEngine, int ID)
-	:TKEngineResource(pEngine, ID)
+TKIndexResource::TKIndexResource(int ID)
+	:TKEngineResource(ID)
 #ifdef TK_D3D9
 	,pIB(NULL)
 #elif defined(TK_D3D11)
@@ -77,8 +77,8 @@ void TKIndexResource::Release(void)
 /////////////////////////////////////////////////////////////////////
 // TKRenderResource
 /////////////////////////////////////////////////////////////////////
-TKRenderResource::TKRenderResource(TKEngine *pEngine, int ID)
-	:TKEngineResource(pEngine, ID)
+TKRenderResource::TKRenderResource(int ID)
+	:TKEngineResource(ID)
 #ifdef TK_D3D9
 	,pVB(NULL)
 	,pVDEC(NULL)

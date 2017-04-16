@@ -9,8 +9,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 //TKMeshMaterial
 ///////////////////////////////////////////////////////////////////////////////
-TKMeshMaterial::TKMeshMaterial( TKEngine *pEngine, string NodeName)
-    :TKEngineResource(pEngine, -1)
+TKMeshMaterial::TKMeshMaterial(string NodeName)
+    :TKEngineResource(-1)
     ,AlphaBlend(false)
 {
     SetObjectType( eotMeshMaterial );
@@ -34,7 +34,8 @@ TKMeshMaterial::TKMeshMaterial( TKEngine *pEngine, string NodeName)
 
 TKMeshMaterial::~TKMeshMaterial(void)
 {
-    MATERIALLIST::iterator it;
+#if 0
+	MATERIALLIST::iterator it;
     for ( it = MaterialList.begin() ; it != MaterialList.end() ; ++it )
     {
         delete it->second;
@@ -46,11 +47,13 @@ TKMeshMaterial::~TKMeshMaterial(void)
             R_TEXTUREMANAGER->ReleaseTexture(pTextures[i]);
         }
     }
+#endif
 }
 
 const TKMeshMaterial & TKMeshMaterial::operator = (const TKMeshMaterial & MeshMaterial)
 {
-    TKEngineResource::operator=((TKEngineResource)MeshMaterial);
+#if 0
+	TKEngineResource::operator=((TKEngineResource)MeshMaterial);
 
     TKMeshMaterial *pMeshMaterial;
 
@@ -84,11 +87,13 @@ const TKMeshMaterial & TKMeshMaterial::operator = (const TKMeshMaterial & MeshMa
     this->TwoSided = MeshMaterial.TwoSided;
 
     return MeshMaterial;
+#endif
 }
 
 TKMeshMaterial * TKMeshMaterial::NewMaterial(string MaterialName)
 {
-    TKMeshMaterial *pMaterial;
+#if 0
+	TKMeshMaterial *pMaterial;
     MATERIALLIST::iterator it;
 
     if ( MaterialName.empty() ) return NULL;
@@ -99,6 +104,9 @@ TKMeshMaterial * TKMeshMaterial::NewMaterial(string MaterialName)
     MaterialList.insert( make_pair( pMaterial->GetNodeName(), pMaterial ) );
 
     return pMaterial;
+#else
+	return NULL;
+#endif
 }
 
 void TKMeshMaterial::DeleteMaterial(TKMeshMaterial * pMaterial)
@@ -146,8 +154,8 @@ void TKMeshMaterial::DeleteMaterial(string MaterialName)
 ////////////////////////////////////////////////////////////////////////////////
 // TKMeshVertexes
 ////////////////////////////////////////////////////////////////////////////////
-TKMeshVertexes::TKMeshVertexes(TKEngine *pEngine, int ID)
-    :TKVertexResource(pEngine, ID)
+TKMeshVertexes::TKMeshVertexes(int ID)
+    :TKVertexResource(ID)
     ,BoneNodeName("")
     ,AnimationMatrixIndex(0)
     ,IsSelected(false)
@@ -431,6 +439,8 @@ void TKMeshVertexes::Init(void)
 {
     __super::Init();
 
+#if 0
+
     switch ( MeshVertexesType )
     {
     case emvtMESH:
@@ -519,6 +529,7 @@ void TKMeshVertexes::Init(void)
         vecMin.z = min( (*it).z, vecMin.z );
     }
     vecCenter = (vecMax + vecMin) / 2.0f;
+#endif
 }
 
 void TKMeshVertexes::Release(void)
@@ -566,8 +577,8 @@ void TKMeshVertexes::Copy_BaseInfo( TKMeshVertexes & Dest, TKMeshVertexes & Src 
 ////////////////////////////////////////////////////////////////////////////////
 // TKMeshFaces
 ////////////////////////////////////////////////////////////////////////////////
-TKMeshFaces::TKMeshFaces(TKEngine *pEngine, int ID)
-:TKIndexResource(pEngine, ID)
+TKMeshFaces::TKMeshFaces(int ID)
+:TKIndexResource(ID)
 ,pMeshVertexes(NULL)
 {
     SetObjectType( eotMeshFaces );
@@ -610,6 +621,8 @@ bool TKMeshFaces::InitIndexBuffers(void)
 bool TKMeshFaces::InitNormalSmoothing(void)
 {
     if ( !pMeshVertexes ) return true;
+
+#if 0
 
     //Smoothing
     //두개이상의 FACE에서,
@@ -695,6 +708,7 @@ bool TKMeshFaces::InitNormalSmoothing(void)
         delete pSameNormalPointers;
     }
 
+#endif
     return true;
 }
 
@@ -747,8 +761,8 @@ void TKMeshFaces::Copy_BaseInfo( TKMeshFaces & Dest, TKMeshFaces & Src )
 ////////////////////////////////////////////////////////////////////////////////
 // TKMeshGeometry
 ////////////////////////////////////////////////////////////////////////////////
-TKMeshGeometry::TKMeshGeometry(TKEngine *pEngine, string NodeName)
-:TKEngineResource(pEngine, -1)
+TKMeshGeometry::TKMeshGeometry(string NodeName)
+:TKEngineResource(-1)
 ,pMeshVertexes(NULL)
 ,pMeshFaces(NULL)
 ,MaterialName("")
@@ -757,9 +771,10 @@ TKMeshGeometry::TKMeshGeometry(TKEngine *pEngine, string NodeName)
 ,pSubMaterial(NULL)
 ,pShaderEffect(NULL)
 {
-    SetObjectType( eotMeshGeometry );
-
+	SetObjectType( eotMeshGeometry );
+#if 0
     this->SetNodeName( NodeName );
+#endif
 }
 
 TKMeshGeometry::~TKMeshGeometry(void)
@@ -820,7 +835,8 @@ void TKMeshGeometry::Copy_BaseInfo( TKMeshGeometry & Dest, TKMeshGeometry & Src 
 
 bool TKMeshGeometry::CreateOBBGeomList( GEOMLIST & GeomList, D3DXVECTOR3 & vecCenter, D3DXVECTOR3 vecAxis[3], float AxisLen[3], D3DXVECTOR3 vecOBB[8])
 {
-    GEOMLIST::iterator it;
+#if 0
+	GEOMLIST::iterator it;
     D3DXVECTOR3S PosList;
 
     int nPoints = 0;
@@ -839,13 +855,16 @@ bool TKMeshGeometry::CreateOBBGeomList( GEOMLIST & GeomList, D3DXVECTOR3 & vecCe
     }
 
     return BuildOBB( PosList, vecCenter, vecAxis, AxisLen, vecOBB );
+#else
+	return false;
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // TKMeshRes
 ////////////////////////////////////////////////////////////////////////////////
-TKMeshRes::TKMeshRes(TKEngine *pEngine, int ID)
-:TKEngineResource(pEngine, ID)
+TKMeshRes::TKMeshRes(int ID)
+:TKEngineResource(ID)
 ,pShaderEffect(NULL)
 {
     SetObjectType( eotMeshRes );
@@ -1014,7 +1033,8 @@ void TKMeshRes::Copy_BaseInfo( TKMeshRes & DestMeshRes, TKMeshRes & SrcMeshRes )
 
 void TKMeshRes::SetShaderEffect(TKMeshShaderEffect *pShaderEffect)
 {
-    this->pShaderEffect = pShaderEffect;
+#if 0
+	this->pShaderEffect = pShaderEffect;
     for ( int i = 0 ; i < (int)GeomList.size() ; ++i )
     {
         GeomList[i]->SetShaderEffect(pShaderEffect);
@@ -1026,6 +1046,7 @@ void TKMeshRes::SetShaderEffect(TKMeshShaderEffect *pShaderEffect)
     {
         BoneList[i]->SetShaderEffect( pBoneShaderEffect );
     };
+#endif
 }
 
 bool TKMeshRes::NewLODDistance(int Distance)
@@ -1131,8 +1152,9 @@ bool TKMeshRes::AddAllGeometryToInfinityLevel(void)
 
 TKMeshMaterial * TKMeshRes::NewMaterial(string MaterialName)
 {
-    TKMeshMaterial *pMaterial;
-    MATERIALLIST::iterator it;
+	TKMeshMaterial *pMaterial = NULL;
+#if 0
+	MATERIALLIST::iterator it;
 
     if ( MaterialName.empty() ) return NULL;
     it = MaterialList.find( MaterialName );
@@ -1140,7 +1162,7 @@ TKMeshMaterial * TKMeshRes::NewMaterial(string MaterialName)
 
     pMaterial = new TKMeshMaterial(GetEngine(), MaterialName);
     MaterialList.insert( make_pair( pMaterial->GetNodeName(), pMaterial ) );
-
+#endif
     return pMaterial;
 }
 
@@ -1241,7 +1263,8 @@ void TKMeshRes::DeleteNoReferenceMaterial(void)
 
 TKMeshVertexes * TKMeshRes::NewVertexes(string NodeName, EMeshVertexesType MeshVertexesType)
 {
-    if ( !NodeName.empty() )
+#if 0
+	if ( !NodeName.empty() )
     {
         VERTEXESLIST::iterator it;
         for ( it = VertexesList.begin() ; it != VertexesList.end() ; ++it )
@@ -1258,6 +1281,9 @@ TKMeshVertexes * TKMeshRes::NewVertexes(string NodeName, EMeshVertexesType MeshV
     pMeshVertexes->SetMeshVertexesType( MeshVertexesType );
 
     return pMeshVertexes;
+#else
+	return nullptr;
+#endif
 }
 
 void TKMeshRes::DeleteVertexes(TKMeshVertexes * pMeshVertexes)
@@ -1322,7 +1348,8 @@ TKMeshVertexes * TKMeshRes::GetVertexesByNodeName(const string NodeName)
 
 TKMeshFaces * TKMeshRes::NewFaces(string NodeName, TKMeshVertexes * pVertexes)
 {
-    if ( !NodeName.empty() )
+#if 0
+	if ( !NodeName.empty() )
     {
         FACESLIST::iterator it;
         for ( it = FacesList.begin() ; it != FacesList.end() ; ++it )
@@ -1339,6 +1366,9 @@ TKMeshFaces * TKMeshRes::NewFaces(string NodeName, TKMeshVertexes * pVertexes)
     pMeshFaces->SetMeshVertexes( pVertexes );
 
     return pMeshFaces;
+#else
+	return nullptr;
+#endif
 }
 
 void TKMeshRes::DeleteFaces(TKMeshFaces * pMeshFaces)
@@ -1404,7 +1434,8 @@ TKMeshFaces * TKMeshRes::GetFacesByNodeName(const string NodeName)
 TKMeshGeometry * TKMeshRes::NewGeometry(string NodeName, TKMeshVertexes * pVertexes, TKMeshFaces * pFaces)
 {
     TKMeshGeometry * pMeshGeometry = NULL;
-    GEOMLIST::iterator it;
+#if 0
+	GEOMLIST::iterator it;
     GEOMLIST *pGeomList;
 
     if ( pVertexes->GetMeshVertexesType() == emvtMESH )
@@ -1429,7 +1460,7 @@ TKMeshGeometry * TKMeshRes::NewGeometry(string NodeName, TKMeshVertexes * pVerte
     pGeomList->push_back( pMeshGeometry );
     pMeshGeometry->SetMeshVertexes( pVertexes );
     pMeshGeometry->SetMeshFaces( pFaces );
-
+#endif
     return pMeshGeometry;
 }
 
@@ -1619,8 +1650,8 @@ D3DXVECTOR3 TKMeshRes::GetMax(void)
 ////////////////////////////////////////////////////////////////////////////////
 // TKAniMeshRes
 ////////////////////////////////////////////////////////////////////////////////
-TKAniMeshRes::TKAniMeshRes(TKEngine *pEngine, int ID)
-:BASECLASS(pEngine, ID)
+TKAniMeshRes::TKAniMeshRes(int ID)
+:BASECLASS(ID)
 ,m_FirstFrame(-1)
 ,m_LastFrame(-1)
 ,m_FrameSpeed(-1)
@@ -1748,7 +1779,8 @@ void TKAniMeshRes::SetAnimationMatrixData(void)
 
 void TKAniMeshRes::MeshAnimationBind(void)
 {
-    TKMeshVertexes *pVertexes = NULL;
+#if 0
+	TKMeshVertexes *pVertexes = NULL;
 
     for ( int i = 0 ; i < (int)VertexesList.size() ; ++i )
     {
@@ -1821,6 +1853,7 @@ void TKAniMeshRes::MeshAnimationBind(void)
 #endif DEBUG_MODE
         }
     }
+#endif
 }
 
 void TKAniMeshRes::Init(void)
@@ -1899,7 +1932,7 @@ void TKAniMeshRes::Copy_BaseInfo( TKAniMeshRes & DestMeshRes, TKAniMeshRes & Src
 pair<int, D3DXMATRIX *> TKAniMeshRes::GetAnimationMatrix(int CurrFrame)
 {
     pair<int, D3DXMATRIX *> RtnValue;
-
+#if 0
     if ( m_MatrixArrayColCount > 0 )
     {
         RtnValue.first = m_MatrixArrayColCount;
@@ -1910,7 +1943,7 @@ pair<int, D3DXMATRIX *> TKAniMeshRes::GetAnimationMatrix(int CurrFrame)
         RtnValue.first = 1;
         RtnValue.second = GetEngine()->GetMatrixIdentity();
     }
-
+#endif
     return RtnValue;
 }
 
@@ -1932,14 +1965,22 @@ const ST_ANIMOTION TKAniMeshRes::GetAniMotionByName(string MotionName)
 
 bool TKAniMeshRes::LoadMotionFile(string FileName)
 {
-    TKMotionFileConverter MotionFileConverter;
+#if 0
+	TKMotionFileConverter MotionFileConverter;
     return MotionFileConverter.ConvertFromKNF( FileName, GetEngine(), this );
+#else
+	return false;
+#endif
 }
 
 bool TKAniMeshRes::SaveMotionFile(string FileName)
 {
-    TKMotionFileConverter MotionFileConverter;
+#if 0
+	TKMotionFileConverter MotionFileConverter;
     return MotionFileConverter.ConvertToKNF( FileName, GetEngine(), this );
+#else
+	return false;
+#endif
 }
 
 bool TKAniMeshRes::LoadFromFile(string FileName)

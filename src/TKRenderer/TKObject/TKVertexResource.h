@@ -17,7 +17,7 @@ protected:
 #endif
 
 public:
-    TKVertexResource(TKEngine *pEngine, int ID);
+    TKVertexResource(int ID);
     virtual ~TKVertexResource(void);
 
     virtual void Init(void);
@@ -45,7 +45,7 @@ protected:
 #endif
 
 public:
-    TKIndexResource(TKEngine *pEngine, int ID);
+    TKIndexResource(int ID);
     virtual ~TKIndexResource(void);
 
     virtual void Init(void);
@@ -75,7 +75,7 @@ protected:
 #endif
 
 public:
-    TKRenderResource(TKEngine *pEngine, int ID);
+    TKRenderResource(int ID);
     virtual ~TKRenderResource(void);
 
     virtual void Init(void);

@@ -1,17 +1,16 @@
 #include "TKD3D.h"
 #include "TKEngine.h"
 #include "DirectXColors.h"
-#include "d3d11_1.h"
 //#include "TKCamera.h"
 
 TKD3D::TKD3D(void)
 	:TKBaseObject(-1)
 	,m_pD3D(nullptr)
-	, m_pD3D1(nullptr)
+	//,m_pD3D1(nullptr)
 	,m_pD3DImmediateContext(nullptr)
-	,m_pD3DImmediateContext1(nullptr)
+	//,m_pD3DImmediateContext1(nullptr)
 	,m_pSwapChain(nullptr)
-	,m_pSwapChain1(nullptr)
+	//,m_pSwapChain1(nullptr)
 	,m_pDepthStencilBuffer(nullptr)
 	,m_pRenderTargetView(nullptr)
 	,m_pDepthStencilView(nullptr)
@@ -22,11 +21,11 @@ TKD3D::TKD3D(void)
 TKD3D::~TKD3D(void)
 {
 	SAFERELEASE(m_pD3D);
-	SAFERELEASE(m_pD3D1);
+	//SAFERELEASE(m_pD3D1);
 	SAFERELEASE(m_pD3DImmediateContext);
-	SAFERELEASE(m_pD3DImmediateContext1);
+	//SAFERELEASE(m_pD3DImmediateContext1);
 	SAFERELEASE(m_pSwapChain);
-	SAFERELEASE(m_pSwapChain1);
+	//SAFERELEASE(m_pSwapChain1);
 	SAFERELEASE(m_pDepthStencilBuffer);
 	SAFERELEASE(m_pRenderTargetView);
 	SAFERELEASE(m_pDepthStencilView);
@@ -47,7 +46,7 @@ void TKD3D::Init(void)
 
 	D3D_FEATURE_LEVEL _featureLevels[] =
 	{
-		D3D_FEATURE_LEVEL_11_1,
+		//D3D_FEATURE_LEVEL_11_1,
 		D3D_FEATURE_LEVEL_11_0,
 		D3D_FEATURE_LEVEL_10_1,
 		D3D_FEATURE_LEVEL_10_0,
@@ -186,11 +185,11 @@ void TKD3D::Init(void)
 void TKD3D::Release(void)
 {
 	SAFERELEASE(m_pD3D);
-	SAFERELEASE(m_pD3D1);
+	//SAFERELEASE(m_pD3D1);
 	SAFERELEASE(m_pD3DImmediateContext);
-	SAFERELEASE(m_pD3DImmediateContext1);
+	//SAFERELEASE(m_pD3DImmediateContext1);
 	SAFERELEASE(m_pSwapChain);
-	SAFERELEASE(m_pSwapChain1);
+	//SAFERELEASE(m_pSwapChain1);
 	SAFERELEASE(m_pDepthStencilBuffer);
 	SAFERELEASE(m_pRenderTargetView);
 	SAFERELEASE(m_pDepthStencilView);

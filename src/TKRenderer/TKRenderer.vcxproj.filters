@@ -8,6 +8,12 @@
     <Filter Include="TKObject">
       <UniqueIdentifier>{142c6ebe-7463-4890-815e-8da7d3328bfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{41e125ea-1e1b-442f-8d72-e8f8436463c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mathmatics">
+      <UniqueIdentifier>{a3f89af2-f2e7-4527-927a-fb29eb80b170}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -59,6 +65,60 @@
       <Filter>TKObject</Filter>
     </ClCompile>
     <ClCompile Include="TKObject\TKVertexResource.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKFile.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKFileConvertClasses.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKFileIOClasses.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKFileStruct.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\FaceVSFace.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\OBBVSFace.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\OBBVSOBB.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\RayVSFace.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\RayVSOBB.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\RayVSSphere.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\SphereVSFace.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\SphereVSOBB.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\SphereVSSphere.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathmatics\Bounding.cpp">
+      <Filter>Mathmatics</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathmatics\Eigen.cpp">
+      <Filter>Mathmatics</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKCollisionResource.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKShaderResource.cpp">
+      <Filter>TKObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TKObject\TKBaseObjectList.cpp">
       <Filter>TKObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,6 +182,44 @@
       <Filter>TKObject</Filter>
     </ClInclude>
     <ClInclude Include="TKObject\TKVertexResource.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKFile.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKFileConvertClasses.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKFileConvertClasses.hpp">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKFileIOClasses.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKFileStruct.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKContainer.h" />
+    <ClInclude Include="TKContainer.hpp" />
+    <ClInclude Include="Collision\CollisionCheck.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathmatics\Bounding.h">
+      <Filter>Mathmatics</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathmatics\Eigen.h">
+      <Filter>Mathmatics</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathmatics\Vector3.h">
+      <Filter>Mathmatics</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKCollisionResource.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKShaderResource.h">
+      <Filter>TKObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TKObject\TKBaseObjectList.h">
       <Filter>TKObject</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,7 +8,9 @@ class TKSGObject;
 ////////////////////////////////////////////////////////////////////////////////
 struct ST_CAMERADATA
 {
-    XMVECTOR	UpVec;
+
+	
+	XMVECTOR	UpVec;
 	XMVECTOR	LookVec;
 	XMVECTOR	RightVec;
 	XMVECTOR	EyePt;

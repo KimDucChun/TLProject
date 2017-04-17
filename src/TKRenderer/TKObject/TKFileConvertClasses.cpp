@@ -761,7 +761,7 @@ TKMAXFileConverter::~TKMAXFileConverter(void)
 {
 }
 
-bool TKMAXFileConverter::ConvertFromKMF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes)
+bool TKMAXFileConverter::ConvertFromKMF(string & FileName, TKAniMeshRes *pAniMeshRes)
 {
     this->pEngine = pEngine;
     this->pAniMeshRes = pAniMeshRes;
@@ -804,9 +804,8 @@ TKModelFileConverter::~TKModelFileConverter(void)
 {
 }
 
-bool TKModelFileConverter::ConvertFromKMT(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes)
+bool TKModelFileConverter::ConvertFromKMT(string & FileName, TKAniMeshRes *pAniMeshRes)
 {
-    this->pEngine = pEngine;
     this->pAniMeshRes = pAniMeshRes;
 
     if (!ModelFileIO.LoadFromFile(FileName.data()))
@@ -838,9 +837,8 @@ bool TKModelFileConverter::ConvertFromKMT(string & FileName, TKEngine *pEngine, 
     return true;
 }
 
-bool TKModelFileConverter::ConvertToKMT(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes)
+bool TKModelFileConverter::ConvertToKMT(string & FileName, TKAniMeshRes *pAniMeshRes)
 {
-    this->pEngine = pEngine;
     this->pAniMeshRes = pAniMeshRes;
 
     ModelFileIO.Clear();
@@ -875,7 +873,7 @@ TKLODFileConverter::~TKLODFileConverter(void)
 {
 }
 
-bool TKLODFileConverter::ConvertFromKLF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes)
+bool TKLODFileConverter::ConvertFromKLF(string & FileName, TKAniMeshRes *pAniMeshRes)
 {
     this->pEngine = pEngine;
     this->pAniMeshRes = pAniMeshRes;
@@ -896,7 +894,7 @@ bool TKLODFileConverter::ConvertFromKLF(string & FileName, TKEngine *pEngine, TK
     return true;
 }
 
-bool TKLODFileConverter::ConvertToKLF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes)
+bool TKLODFileConverter::ConvertToKLF(string & FileName, TKAniMeshRes *pAniMeshRes)
 {
     this->pEngine = pEngine;
     this->pAniMeshRes = pAniMeshRes;
@@ -919,7 +917,7 @@ TKMotionFileConverter::~TKMotionFileConverter(void)
 {
 }
 
-bool TKMotionFileConverter::ConvertFromKNF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes)
+bool TKMotionFileConverter::ConvertFromKNF(string & FileName, TKAniMeshRes *pAniMeshRes)
 {
     this->pEngine = pEngine;
     this->pAniMeshRes = pAniMeshRes;
@@ -936,7 +934,7 @@ bool TKMotionFileConverter::ConvertFromKNF(string & FileName, TKEngine *pEngine,
     return true;
 }
 
-bool TKMotionFileConverter::ConvertToKNF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes)
+bool TKMotionFileConverter::ConvertToKNF(string & FileName, TKAniMeshRes *pAniMeshRes)
 {
     this->pEngine = pEngine;
     this->pAniMeshRes = pAniMeshRes;
@@ -960,7 +958,6 @@ TKCollisionFileConverter::~TKCollisionFileConverter(void)
 }
 
 bool TKCollisionFileConverter::ConvertFromKCF( string & FileName,
-                                        TKEngine *pEngine,
                                         TKCollisionObjectRes *pCollisionRes,
                                         ECollisionObjectType CollisionObjectType)
 {
@@ -987,11 +984,9 @@ bool TKCollisionFileConverter::ConvertFromKCF( string & FileName,
     return true;
 }
 
-bool TKCollisionFileConverter::ConvertFromKCT( string & FileName,
-                                        TKEngine *pEngine,
-                                        TKCollisionObjectRes *pCollisionRes)
+bool TKCollisionFileConverter::ConvertFromKCT(string & FileName,
+	TKCollisionObjectRes *pCollisionRes)
 {
-    this->pEngine = pEngine;
     this->pCollisionRes = pCollisionRes;
     KCTFileIO.Clear();
     KCTFileIO.LoadFromFile( FileName.data() );
@@ -1002,10 +997,8 @@ bool TKCollisionFileConverter::ConvertFromKCT( string & FileName,
 
 
 bool TKCollisionFileConverter::ConvertToKCT( string & FileName,
-                                      TKEngine *pEngine,
                                       TKCollisionObjectRes *pCollisionRes)
 {
-    this->pEngine = pEngine;
     this->pCollisionRes = pCollisionRes;
     KCTFileIO.Clear();
     ExtractCollisionToFile( pCollisionRes, &KCTFileIO.Collision );
@@ -1026,9 +1019,8 @@ TKSGObjectFileConverter::~TKSGObjectFileConverter(void)
 }
 
 pair<TKMeshRes *, TKCollisionObjectRes *> TKSGObjectFileConverter::ConvertFromKSG
-(string & FileName, TKEngine *pEngine)
+(string & FileName)
 {
-	this->pEngine = pEngine;
 	this->pAniMeshRes = NULL;
 	this->pCollisionRes = NULL;
 
@@ -1099,7 +1091,6 @@ pair<TKMeshRes *, TKCollisionObjectRes *> TKSGObjectFileConverter::ConvertFromKS
 }
 
 bool TKSGObjectFileConverter::ConvertToKSG( string & FileName, 
-                                            TKEngine *pEngine, 
                                             TKAniMeshRes *pAniMeshRes,
                                             TKCollisionObjectRes *pCollisionRes)
 {

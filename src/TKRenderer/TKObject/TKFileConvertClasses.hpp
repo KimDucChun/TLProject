@@ -9,8 +9,9 @@ using namespace FILESTRUCT;
 template <typename OWNER>
 void TKCustomFileConverter::ExtractMaterialFromFile(OWNER *pDestOwner, FILESTRUCT::ST_MATERIALS *pSrcList)
 {
-    // 메터리얼 정보
-    TKMeshMaterial *pMaterial;
+#if 0
+	// 메터리얼 정보
+	TKMeshMaterial *pMaterial;
     ST_MATERIALS::iterator itMat;
     
     for ( itMat = pSrcList->begin() ; itMat != pSrcList->end() ; ++itMat )
@@ -37,6 +38,7 @@ void TKCustomFileConverter::ExtractMaterialFromFile(OWNER *pDestOwner, FILESTRUC
         // 서브메터리얼
         ExtractMaterialFromFile<TKMeshMaterial>( pMaterial, &(*itMat)->SubMaterialList );
     }
+#endif
 }
 
 template <typename OWNER>

@@ -86,8 +86,8 @@ const TKMeshMaterial & TKMeshMaterial::operator = (const TKMeshMaterial & MeshMa
     this->AlphaTestRef = MeshMaterial.AlphaTestRef;
     this->TwoSided = MeshMaterial.TwoSided;
 
-    return MeshMaterial;
 #endif
+	return MeshMaterial;
 }
 
 TKMeshMaterial * TKMeshMaterial::NewMaterial(string MaterialName)
@@ -1988,17 +1988,17 @@ bool TKAniMeshRes::LoadFromFile(string FileName)
     if (strstr(FileName.data(), ".KMF"))
     {
         TKMAXFileConverter MAXFileConverter;
-        return MAXFileConverter.ConvertFromKMF(FileName, GetEngine(), this);
+        return MAXFileConverter.ConvertFromKMF(FileName, this);
     }
     if (strstr(FileName.data(), ".KAF"))
     {
         TKMAXFileConverter MAXFileConverter;
-        return MAXFileConverter.ConvertFromKMF(FileName, GetEngine(), this);
+        return MAXFileConverter.ConvertFromKMF(FileName, this);
     }
     if (strstr(FileName.data(), ".KMT"))
     {
         TKModelFileConverter ModelFileConverter;
-        return ModelFileConverter.ConvertFromKMT(FileName, GetEngine(), this);
+        return ModelFileConverter.ConvertFromKMT(FileName, this);
     }
     return false;
 }
@@ -2008,7 +2008,7 @@ bool TKAniMeshRes::SaveToFile(string FileName)
     if (strstr(FileName.data(), ".KMT"))
     {
         TKModelFileConverter ModelFileConverter;
-        return ModelFileConverter.ConvertToKMT(FileName, GetEngine(), this);
+        return ModelFileConverter.ConvertToKMT(FileName, this);
     }
     return false;
 }
@@ -2016,11 +2016,11 @@ bool TKAniMeshRes::SaveToFile(string FileName)
 bool TKAniMeshRes::LoadLodFile(string FileName)
 {
     TKLODFileConverter LODFileConverter;
-    return LODFileConverter.ConvertFromKLF( FileName, GetEngine(), this );
+    return LODFileConverter.ConvertFromKLF( FileName, this );
 }
 
 bool TKAniMeshRes::SaveLodFile(string FileName)
 {
     TKLODFileConverter LODFileConverter;
-    return LODFileConverter.ConvertToKLF( FileName, GetEngine(), this );
+    return LODFileConverter.ConvertToKLF( FileName, this );
 }

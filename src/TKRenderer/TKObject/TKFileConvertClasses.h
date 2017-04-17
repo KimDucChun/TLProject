@@ -87,7 +87,7 @@ public:
     TKMAXFileConverter(void);
     virtual ~TKMAXFileConverter(void);
 
-    bool ConvertFromKMF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes);
+    bool ConvertFromKMF(string & FileName, TKAniMeshRes *pAniMeshRes);
 };
 
 /////////////////////////////////////////////////////////////////////
@@ -100,8 +100,8 @@ public:
     TKModelFileConverter(void);
     virtual ~TKModelFileConverter(void);
 
-    bool ConvertFromKMT(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes);
-    bool ConvertToKMT(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes);
+    bool ConvertFromKMT(string & FileName, TKAniMeshRes *pAniMeshRes);
+    bool ConvertToKMT(string & FileName, TKAniMeshRes *pAniMeshRes);
 };
 
 /////////////////////////////////////////////////////////////////////
@@ -114,8 +114,8 @@ public:
     TKLODFileConverter(void);
     virtual ~TKLODFileConverter(void);
 
-    bool ConvertFromKLF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes);
-    bool ConvertToKLF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes);
+    bool ConvertFromKLF(string & FileName, TKAniMeshRes *pAniMeshRes);
+    bool ConvertToKLF(string & FileName, TKAniMeshRes *pAniMeshRes);
 };
 
 /////////////////////////////////////////////////////////////////////
@@ -128,8 +128,8 @@ public:
     TKMotionFileConverter(void);
     virtual ~TKMotionFileConverter(void);
 
-    bool ConvertFromKNF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes);
-    bool ConvertToKNF(string & FileName, TKEngine *pEngine, TKAniMeshRes *pAniMeshRes);
+    bool ConvertFromKNF(string & FileName, TKAniMeshRes *pAniMeshRes);
+    bool ConvertToKNF(string & FileName, TKAniMeshRes *pAniMeshRes);
 };
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -146,16 +146,13 @@ public:
     virtual ~TKCollisionFileConverter(void);
 
     bool ConvertFromKCF(string & FileName,
-                        TKEngine *pEngine,
                         TKCollisionObjectRes *pCollisionRes,
                         ECollisionObjectType CollisionObjectType);
 
     bool ConvertFromKCT(string & FileName,
-                        TKEngine *pEngine,
                         TKCollisionObjectRes *pCollisionRes);
                         
     bool ConvertToKCT(  string & FileName,
-                        TKEngine *pEngine,
                         TKCollisionObjectRes *pCollisionRes);                        
 };
 
@@ -171,10 +168,9 @@ public:
     virtual ~TKSGObjectFileConverter(void);
     
     pair<TKMeshRes *, TKCollisionObjectRes *>ConvertFromKSG
-        ( string & FileName, TKEngine *pEngine );
+        ( string & FileName );
 
     bool ConvertToKSG(  string & FileName, 
-                        TKEngine *pEngine, 
                         TKAniMeshRes *pAniMeshRes,
                         TKCollisionObjectRes *pCollisionRes);
 };
